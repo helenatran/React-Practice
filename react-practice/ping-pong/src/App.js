@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            status: "Ping",
+            button: "Pong",
+            counter: 0,
+        }
+    }
+
+    handleClick() {
+        this.setState({ counter: this.state.counter + 1 });
+        if (this.state.status == "Ping") {
+            this.setState({
+                status: "Pong",
+                button: "Ping",
+            });
+        }
+        else {
+            this.setState({
+                status: "Ping",
+                button: "Pong",
+            });
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <p>{this.state.status}?</p>
+                <p>Count: {this.state.counter}</p>
+                <button onClick={() => { this.handleClick() }}>{this.state.button}</button>
+            </div>
+        )
+    }
+
 }
 
 export default App;
