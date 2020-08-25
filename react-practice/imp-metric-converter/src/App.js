@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import TemperatureConverter from './TemperatureConverter';
+import DistanceConverter from './DistanceConverter';
 
+const TEMPERATURE = 'Temperature';
+const DISTANCE = 'Distance';
+
+//A "tabbed" switcher between temperature and distance conversion
 function App() {
+
+  //Initialise "show", with Temperature tab being displayed first
+  let [show, setShow] = useState(TEMPERATURE);
+
+  //switch between tabs
+  let converter;
+  if (show === TEMPERATURE) {
+    converter = <TemperatureConverter />
+  }
+  else {
+    converter = <DistanceConverter />
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Imperial to Metric Converter</h1>
+      <div>
+        <button>{TEMPERATURE}</button>
+        <button>{DISTANCE}</button>
+      </div>
+      {converter}
     </div>
   );
 }
