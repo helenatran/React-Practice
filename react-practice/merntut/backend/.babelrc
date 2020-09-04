@@ -1,0 +1,8 @@
+//configuration file for babel
+//object which specifies how we will be using babel
+{
+    "presets": [
+        "env",
+        "stage-0" //stage-0 includes all recent changes on the languages
+    ]
+}
