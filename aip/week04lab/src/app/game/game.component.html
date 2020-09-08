@@ -1,0 +1,19 @@
+<h1>Technology guessing game</h1>
+<p>Status: {{status}}</p>
+<p>Next guess:
+    <input type="text" [(ngModel)]="guess">
+</p>
+<button type="submit" (click)="check()">Check</button>
+<div *ngIf="gameService.guessHistory.length > 0">
+    <h4>Guess History:</h4>
+    <ol>
+        <li *ngFor="let historyItem of gameService.guessHistory">
+            {{historyItem}}
+        </li>
+    </ol>
+</div>
+
+
+<div *ngIf="guess === 'Angular'">
+    You said Angular!
+</div>
