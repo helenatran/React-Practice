@@ -3,19 +3,28 @@ import mongoose from "mongoose";
 import bodyparser from "body-parser";
 import routes from './routes/soccerRoutes';
 
-const app = express();
-const PORT = 3000;
+//environment variables
+require('dotenv').config();
 
-//mongo connection (mongoose is to simplify our connection to mongo + use shorter syntax)
-mongoose.Promise = global.Promise; //promise waits for a response before telling us whether it successfully runs
-mongoose.connect("mongodb://localhost/soccerDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 //bodyparser setup
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
+
+//mongo connection (mongoose is to simplify our connection to mongo + use shorter syntax)
+const URI = process.env.ATLAS_URI;
+mongoose.connect(URI, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+});
+
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log("MongoDB connection successful")
+})
 
 routes(app);
 
